@@ -1,0 +1,9 @@
+root = true
+
+[*.{jsx,js,pug}]
+charset = utf-8
+
+[*]
+indent_style = space
+indent_size = 2
+
