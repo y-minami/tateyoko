@@ -1,0 +1,7 @@
+:local .wrap {
+  width: 100%;
+  height: 100%;
+  writing-mode: vertical-rl;
+  padding: 5rem;
+  box-sizing: border-box;
+}
