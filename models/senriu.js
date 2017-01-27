@@ -7,6 +7,7 @@ var SenriuSchema   = new Schema({
 		type: String,
 		default: shortid.generate
 	},
+	themeId: String,
 	author: String,
 	col1: String,
 	col2: String,

@@ -5,7 +5,7 @@
   padding: 5rem;
   box-sizing: border-box;
 }
-:local .wrap li {
+:local .cols li {
   display: block;
   height: 7.5em;
   margin-right: 1.2em;
@@ -15,19 +15,19 @@
   vertical-align: top;
   letter-spacing: 0.5em;
 }
-:local .wrap li span {
+:local .cols li span {
   display: inline-block;
   width: 1em;
   height: 1px;
   background-color: #333;
 }
-:local .wrap li:first-child {
+:local .cols li:first-child {
   margin-right: 0;
 }
-:local .wrap li:nth-child(2) {
+:local .cols li:nth-child(2) {
   height: 10.5em;
 }
-:local .wrap a {
+:local .button {
   display: inline-block;
   margin-right: 2.4em;
   padding: 0.8em;

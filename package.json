@@ -2,12 +2,11 @@
   "name": "tateyoko",
   "version": "1.0.0",
   "description": "This repository is for web awards for horizontal and vertical writings.",
-  "main": "webpack.config.js",
+  "main": "server.js",
   "scripts": {
-    "start": "npm run pug & npm run webpack & npm run server",
+    "start": "npm run webpack & npm run server",
     "server": "node ./server.js",
-    "webpack": "webpack -w",
-    "pug": "pug -rwo ./public ./src"
+    "webpack": "webpack -w"
   },
   "repository": {
     "type": "git",
@@ -31,6 +30,7 @@
     "browser-sync": "^2.18.5",
     "css-loader": "^0.26.1",
     "express": "^4.14.0",
+    "method-override": "^2.3.7",
     "mongoose": "^4.7.7",
     "postcss-custom-media": "^5.0.1",
     "postcss-import": "^9.1.0",

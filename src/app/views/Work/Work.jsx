@@ -19,6 +19,8 @@ export default React.createClass({
           return;
         }
 
+        console.log(res.body)
+
         this.setState({
           senriu: res.body
         });
