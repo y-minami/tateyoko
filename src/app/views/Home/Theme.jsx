@@ -9,7 +9,8 @@ export default React.createClass({
 
   getInitialState() {
     return {
-      selected: ''
+      selected: '',
+      isOpen: false
     };
   },
 
@@ -25,15 +26,40 @@ export default React.createClass({
     return (value === this.state.selected) ? style.active : '';
   },
 
+  onClickHeadline() {
+    let contents = document.getElementById(style.contents);
+    let list = document.querySelector('.' + style.list);
+
+    if (this.state.isOpen) {
+      contents.style.width = '0px';
+      this.setState({
+        isOpen: false
+      });
+    }
+    else {
+      contents.style.width = `${list.offsetWidth}px`;
+      this.setState({
+        isOpen: true
+      });
+    }
+  },
+
   render() {
     return(
-      <ol>
-        {this.props.theme.map((theme)=>{
-          return (
-            <li className={this.isActive(theme._id)} onClick={this.onClickTheme.bind(this, theme._id)}>{theme.title}</li>
-          )
-        })}
-      </ol>
+      <div>
+        <dl className={style.wrap}>
+          <dt onClick={this.onClickHeadline}>テーマを選択する</dt>
+          <dd id={style.contents}>
+            <ol className={style.list}>
+              {this.props.theme.map((theme)=>{
+                return (
+                  <li className={this.isActive(theme._id)} onClick={this.onClickTheme.bind(this, theme._id)}>{theme.title}</li>
+                )
+              })}
+            </ol>
+          </dd>
+        </dl>
+      </div>
     )
   }
 });

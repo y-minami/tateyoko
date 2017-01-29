@@ -3,6 +3,5 @@ node_modules/
 Thumbs.db
 .idea
 
-public/
-!public/font
+public/**/*.js
 config.js

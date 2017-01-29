@@ -125,7 +125,6 @@ export default React.createClass({
     return(
       <div className={style.wrap}>
         <Theme theme={this.state.theme} onChange={this.onChangeTheme} />
-        {console.log(Theme.state)}
         <ol className={style.cols}>
           <li id="col1" data-target="inputCol1" onClick={this.onClickCol}></li>
           <li id="col2" data-target="inputCol2" onClick={this.onClickCol}></li>

@@ -144,7 +144,7 @@ app.use('/admin', (req, res)=>{
 });
 
 app.use('/', express.static('public'));
-app.get('/', (req, res)=>{
+app.get('/*', (req, res)=>{
 	res.render('index');
 });
 
