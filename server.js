@@ -14,6 +14,7 @@ const apiRouter = express.Router();
 // models
 const Senriu = require('./models/senriu');
 const Theme = require('./models/theme');
+const ThemeOrder = require('./models/themeOrder');
 
 mongoose.connect('mongodb://0.0.0.0:27017/tateyoko');
 
@@ -118,6 +119,13 @@ apiRouter.route('/theme/:themeId')
 		});
 	});
 
+// apiRouter.route('/themeOrder')
+// 	.get((req, res)=>{
+
+// 	})
+// 	.post((req, res)=>{
+
+// 	});
 
 
 app.use('/api', apiRouter);

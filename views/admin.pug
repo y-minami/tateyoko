@@ -22,9 +22,11 @@ html
   body
     h1 管理画面
     div#app
+      h2 テーマ追加
       form(action="/api/theme", method="post")
         input(type="text", name="title")
         input(type="submit", value="送信")
+      h2 テーマ削除
       form(action="/api/theme?_method=DELETE", method="post")
         ul
           each digit in theme
@@ -33,6 +35,7 @@ html
                 input(type="checkbox", name="ids", value=`${digit._id}`)
                 span= digit.title
         input(type="submit", value="削除")
+      h2 せんりう削除
       form(action="/api/senriu?_method=DELETE", method="post")
         ul
           each digit in senriu
