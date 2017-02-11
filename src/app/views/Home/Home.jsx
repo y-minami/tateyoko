@@ -32,7 +32,6 @@ export default React.createClass({
       .get('/api/theme')
       .end((err, res)=>{
         if (err) {
-          console.log(err);
           return;
         }
 

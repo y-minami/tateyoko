@@ -14,7 +14,6 @@ const apiRouter = express.Router();
 // models
 const Senriu = require('./models/senriu');
 const Theme = require('./models/theme');
-const ThemeOrder = require('./models/themeOrder');
 
 mongoose.connect('mongodb://0.0.0.0:27017/tateyoko');
 
@@ -22,7 +21,7 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback () {
 	mongoose.Promise = global.Promise;
-  console.log("Connected to 'mydb' database");
+  console.log("Connected to 'tateyoko' database");
 });
 
 app.use(bodyParser.urlencoded({
@@ -55,11 +54,31 @@ apiRouter.route('/senriu')
 		});
 	})
 	.get((req, res)=>{
-		Senriu.find((err, senriu)=>{
-			if (err) res.send(err);
+		Senriu
+			.find()
+			.sort('update')
+			.exec((err, senriu)=>{
+				Theme
+					.find()
+					.sort('-order')
+					.exec((err, themes)=>{
+						let themeIds = [];
+						themes.forEach((theme)=>{
+							themeIds.push(theme._id.toString());
+						});
 
-			res.json(senriu)
-		});
+						let result = senriu.sort((a, b)=>{
+							if (themeIds.indexOf(a.themeId) < themeIds.indexOf(b.themeId)) return -1;
+							if (themeIds.indexOf(a.themeId) > themeIds.indexOf(b.themeId)) return 1;
+							return 0;
+						});
+
+						console.log(themeIds);
+						console.log(result);
+
+						res.json(result);
+					});
+			});
 	})
 	.delete((req, res)=>{
 		let urlIds = (typeof req.body.urlIds === 'string') ? [req.body.urlIds] : req.body.urlIds;
@@ -81,24 +100,34 @@ apiRouter.route('/senriu/:urlId')
 
 apiRouter.route('/theme')
 	.get((req, res)=>{
-		Theme.find((err, theme)=>{
-			if (err) res.send(err);
-
-			res.json(theme);
-		});
+		Theme
+			.find()
+			.sort('-order')
+			.exec((err, themes)=>{
+				if (err) res.send(err);
+				res.json(themes);
+			});
 	})
 	.post((req, res)=>{
 		let theme = new Theme();
 
-		theme.title = req.body.title;
+		Theme
+			.find()
+			.sort('order')
+			.exec((err, themes)=>{
+				if (err) res.send(err);
 
-		theme.save((err)=>{
-			if (err) res.send(err);
+				let order = (themes.length !== 0) ? themes[0].order + 1 : 0;
 
-			res.json({
-				message: 'created theme'
+				theme.title = req.body.title;
+				theme.order = order;
+
+				theme.save((err)=>{
+					res.json({
+						message: 'create theme'
+					});
+				});
 			});
-		});
 	})
 	.delete((req, res)=>{
 		let ids = (typeof req.body.ids === 'string') ? [req.body.ids] : req.body.ids;
@@ -119,14 +148,19 @@ apiRouter.route('/theme/:themeId')
 		});
 	});
 
-// apiRouter.route('/themeOrder')
-// 	.get((req, res)=>{
+apiRouter.route('/theme/order')
+	.post((req, res)=>{
+		req.body.ids.forEach((_id, index)=>{
+			Theme.findOne({_id: _id}, (err, theme)=>{
+				theme.order = req.body.order[index];
+				theme.save((err)=>{
+					if (err) res.send(err);
+				})
+			});
+		});
 
-// 	})
-// 	.post((req, res)=>{
-
-// 	});
-
+		res.send('edit theme order');
+	});
 
 app.use('/api', apiRouter);
 
