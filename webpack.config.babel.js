@@ -35,8 +35,8 @@ export default {
     require('postcss-import'),
     require('postcss-custom-media')({
       extensions: {
-        '--phone': '(min-width: 375px)',
-        '--desktop': '(min-width: 1080px)'
+        '--phone': '(max-width: 414px)',
+        '--desktop': '(max-width: 1080px)'
       }
     })
   ],
