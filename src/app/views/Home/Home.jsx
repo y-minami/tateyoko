@@ -4,27 +4,17 @@ import request from 'superagent';
 import style from './Home.css';
 
 import Theme from './Theme.jsx';
-import Input from './Input.jsx';
-
-const renderCaret = (inputElement, renderElement, caretNum)=>{
-  let input = inputElement;
-  let col = renderElement;
-  let colVal = input.value;
-  let str1 = document.createTextNode(colVal.slice(0, caretNum));
-  let str2 = document.createTextNode(colVal.slice(caretNum, colVal.length));
-  let caret = document.createElement('SPAN');
-
-  col.innerHTML = '';
-  col.appendChild(str1);
-  col.appendChild(caret);
-  col.appendChild(str2);
-};
+import Author from './Input.jsx';
+import Col1 from './Input.jsx';
+import Col2 from './Input.jsx';
+import Col3 from './Input.jsx';
 
 export default React.createClass({
   getInitialState() {
     return {
       theme: [],
       themeId: '',
+      themeTitle: '',
       author: '',
       col1: '',
       col2: '',
@@ -46,44 +36,11 @@ export default React.createClass({
       });
   },
 
-  onInputCol(e) {
-    renderCaret(
-      e.target,
-      document.getElementById(e.target.dataset.target),
-      e.target.selectionStart
-    );
-  },
-
-  onKeyDownCol(e) {
-    let caretNum;
-
-    switch (e.keyCode) {
-      // left
-      case 37:
-        caretNum = Math.max(0, (e.target.selectionStart - 1));
-        break;
-      // right
-      case 39:
-        caretNum = Math.min(e.target.value.length, (e.target.selectionStart + 1));
-        break;
-      // top
-      case 38:
-        caretNum = 0;
-        break;
-      // down
-      case 40:
-        caretNum = e.target.value.length;
-        break;
-      default:
-        return;
-        break;
-    }
-
-    renderCaret(
-      e.target,
-      document.getElementById(e.target.dataset.target),
-      caretNum
-    );
+  onChangeTheme(themeId, themeTitle) {
+    this.setState({
+      themeId,
+      themeTitle
+    });
   },
 
   onClickSubmit(e) {
@@ -102,38 +59,27 @@ export default React.createClass({
       });
   },
 
-  onClickCol(e) {
-    document.getElementById(e.currentTarget.dataset.target).focus();
-  },
-
-  onBlurCol(e) {
-    let col = document.getElementById(e.target.dataset.target);
-    let text = col.textContent;
-
-    col.textContent = text;
-  },
-
-  onFocusCol(e) {
-    let col = document.getElementById(e.target.dataset.target);
-    let caret = document.createElement('SPAN');
-
-    col.appendChild(caret);
-  },
-
-  onChangeTheme(themeId) {
-    this.setState({
-      themeId
-    });
-  },
-
   onClickNext() {
+    // layoutのclass変更
     this.props.onChange('fullscreen');
+
+    let phase1 = document.getElementById(style.phase1);
+    let phase2 = document.getElementById(style.phase2);
+
+    phase1.style.display = 'none';
+    phase2.style.display = 'block';
+  },
+
+  setValue(key, val) {
+    this.setState({
+      [key]: val
+    });
   },
 
   render() {
     return(
       <div className={style.wrap}>
-        <div className={style.phase1}>
+        <div id={style.phase1} className={style.phase1}>
           <div>
             <p>ようこそ、「せんりう」へ。</p>
             <p>まずはあなたの俳号（ニックネーム）を決めましょう。</p>
@@ -141,7 +87,7 @@ export default React.createClass({
           </div>
           <div>
             <h2>俳号</h2>
-            <Input number="10" />
+            <Author id="author" number="10" onChange={this.setValue} />
           </div>
           <div>
             <h2>お題</h2>
@@ -149,22 +95,21 @@ export default React.createClass({
           </div>
           <a href="#" className={style.button} onClick={this.onClickNext}>一句詠む</a>
         </div>
-        <div className={style.phase2}>
-          <h2>お題「デザイナーあるある」</h2>
-          <div>
-            <div><p></p><input /></div>
-            <div><p></p><input /></div>
-            <div><p></p><input /></div>
-          </div>
+        <div id={style.phase2} className={style.phase2}>
+          <h2>お題「{this.state.themeTitle}」</h2>
           <ol className={style.cols}>
-            <li id="col1" data-target="inputCol1" onClick={this.onClickCol}></li>
-            <li id="col2" data-target="inputCol2" onClick={this.onClickCol}></li>
-            <li id="col3" data-target="inputCol3" onClick={this.onClickCol}></li>
+            <li><Col1 id="col1" number="5" onChange={this.setValue} /></li>
+            <li><Col2 id="col2" number="7" onChange={this.setValue} /></li>
+            <li><Col3 id="col3" number="5" onChange={this.setValue} /></li>
           </ol>
-          <input id="inputCol1" data-target="col1" type="text" onInput={this.onInputCol} onKeyDown={this.onKeyDownCol} onBlur={this.onBlurCol} onFocus={this.onFocusCol} />
-          <input id="inputCol2" data-target="col2" type="text" onInput={this.onInputCol} onKeyDown={this.onKeyDownCol} onBlur={this.onBlurCol} onFocus={this.onFocusCol} />
-          <input id="inputCol3" data-target="col3" type="text" onInput={this.onInputCol} onKeyDown={this.onKeyDownCol} onBlur={this.onBlurCol} onFocus={this.onFocusCol} />
-          <a href="#">次へ</a>
+          <ul className={style.nav}>
+            <li><a href="#">詠むのをやめる</a></li>
+            <li><a href="#">次へ</a></li>
+          </ul>
+          <ul className={style.nav2}>
+            <li><a href="#">詠み直す</a></li>
+            <li><a href="#">投稿する</a></li>
+          </ul>
         </div>
       </div>
     )

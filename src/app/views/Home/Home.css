@@ -5,49 +5,12 @@
   padding: 5rem;
   box-sizing: border-box;
 }
-:local .col {
-  display: inline-block;
-  position: relative;
-  overflow: hidden;
-  background: #fff;
-  line-height: 1;
-}
-:local .col input {
-  position: absolute;
-  left: 0;
-  top: -1rem;
-  opacity: 0;
-}
-:local .col span {
-  display: inline-block;
-  border: 1px solid #ccc;
-  width: 3rem;
-  height: 3rem;
-  text-align: center;
-  line-height: 3rem;
-}
 
 :local .cols li {
-  display: block;
-  height: 7.5em;
   margin-right: 1.2em;
-  padding: 1.2em 1em;
-  background-color: #fff;
-  border: 1px solid #280046;
-  vertical-align: top;
-  letter-spacing: 0.5em;
-}
-:local .cols li span {
-  display: inline-block;
-  width: 1em;
-  height: 1px;
-  background-color: #333;
 }
 :local .cols li:first-child {
   margin-right: 0;
-}
-:local .cols li:nth-child(2) {
-  height: 10.5em;
 }
 :local .button {
   display: inline-block;
@@ -56,4 +19,9 @@
   background-color: #fff;
   border: 1px solid #333;
   font-size: 1.8rem;
+}
+:local .phase1 {
+}
+:local .phase2 {
+  display: none;
 }

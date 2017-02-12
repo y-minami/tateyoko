@@ -2,20 +2,37 @@ import React from 'react';
 
 import style from './Input.css';
 
+const Column = React.createClass({
+  propTypes: {
+    number: React.PropTypes.number,
+    value: React.PropTypes.string,
+    current: React.PropTypes.number
+  },
 
-const renderCaret = (inputElement, renderElement, caretNum)=>{
-  let input = inputElement;
-  let col = renderElement;
-  let colVal = input.value;
-  let str1 = document.createTextNode(colVal.slice(0, caretNum));
-  let str2 = document.createTextNode(colVal.slice(caretNum, colVal.length));
-  let caret = document.createElement('SPAN');
+  stringSpaces() {
+    let values = this.props.value.split('');
+    let result = [];
 
-  col.innerHTML = '';
-  col.appendChild(str1);
-  col.appendChild(caret);
-  col.appendChild(str2);
-};
+    for (let i = 0; i < this.props.number; i++) {
+      if (i === this.props.current) {
+        result.push(<span className={style.current}>{values[i]}</span>);
+      }
+      else {
+        result.push(<span>{values[i]}</span>);
+      }
+    }
+
+    return (result);
+  },
+
+  render () {
+    return (
+      <p>
+        {this.stringSpaces()}
+      </p>
+    )
+  }
+});
 
 export default React.createClass({
   propTypes: {
@@ -24,80 +41,85 @@ export default React.createClass({
 
   getInitialState() {
     return {
-      value: ''
+      value: '',
+      current: -1
     };
   },
 
+  onClickCol(e) {
+    this.hiddenInput.focus();
+  },
+
   onInputCol(e) {
-    renderCaret(
-      e.target,
-      document.getElementById(e.target.dataset.target),
-      e.target.selectionStart
-    );
+
+    this.setState({
+      current: Math.max(0, e.target.selectionStart),
+      value: this.hiddenInput.value
+    });
+  },
+
+  onKeyUpCol(e) {
+    // move caret
+    this.hiddenInput.setSelectionRange(this.state.current, this.state.current);
+
+    // Homeに伝達
+    this.props.onChange(this.props.id, this.state.value);
   },
 
   onKeyDownCol(e) {
     let caretNum;
 
+    if (e.shiftKey) return;
+
     switch (e.keyCode) {
       // left
       case 37:
-        caretNum = Math.max(0, (e.target.selectionStart - 1));
+        // caretNum = Math.max(0, (e.target.selectionStart - 1));
+        return;
         break;
       // right
       case 39:
-        caretNum = Math.min(e.target.value.length, (e.target.selectionStart + 1));
+        // caretNum = Math.min(e.target.value.length, (e.target.selectionStart + 1));
+        return;
         break;
       // top
       case 38:
-        caretNum = 0;
+        caretNum = Math.max(0, (this.state.current - 1));
         break;
       // down
       case 40:
-        caretNum = e.target.value.length;
+        caretNum = Math.min(e.target.value.length, (this.state.current + 1));
         break;
       default:
         return;
         break;
     }
 
-    renderCaret(
-      e.target,
-      document.getElementById(e.target.dataset.target),
-      caretNum
-    );
-  },
-
-  onClickCol(e) {
-    document.getElementById(e.currentTarget.dataset.target).focus();
+    this.setState({
+      value: this.hiddenInput.value,
+      current: caretNum
+    });
   },
 
   onBlurCol(e) {
-    let col = document.getElementById(e.target.dataset.target);
-    let text = col.textContent;
-
-    col.textContent = text;
+    this.setState({
+      current: -1
+    });
   },
 
   onFocusCol(e) {
-    let col = document.getElementById(e.target.dataset.target);
-    let caret = document.createElement('SPAN');
-
-    col.appendChild(caret);
+    this.setState({
+      current: this.state.value.length
+    });
   },
 
   render() {
-    let stringSpaces = [];
-    for (let i = 0; i < this.props.number; i++) {
-        stringSpaces.push(<span></span>);
-    }
-
     return(
       <div className={style.col}>
-        <p onClick={this.onClickCol}>
-          {stringSpaces}
-        </p>
-        <input type="text" onInput={this.onInputCol} onKeyDown={this.onKeyDownCol} onBlur={this.onBlurCol} onFocus={this.onFocusCol} />
+        <div onClick={this.onClickCol}>
+          <Column number={this.props.number} value={this.state.value} current={this.state.current} />
+        </div>
+        <input type="text" ref={(input)=>{this.hiddenInput=input;}} onInput={this.onInputCol} onKeyDown={this.onKeyDownCol} onKeyUp={this.onKeyUpCol} onBlur={this.onBlurCol} onFocus={this.onFocusCol} />
       </div>
     )
   }

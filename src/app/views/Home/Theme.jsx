@@ -10,56 +10,59 @@ export default React.createClass({
   getInitialState() {
     return {
       selected: '',
-      isOpen: false
+      isOpenedModal: false
     };
   },
 
-  onClickTheme(value) {
+  onClickTheme(themeId, title) {
     this.setState({
-      selected: value
+      selected: themeId
     });
 
-    this.props.onChange(value);
+    // Homeに伝達
+    this.props.onChange(themeId, title);
   },
 
   isActive(value) {
     return (value === this.state.selected) ? style.active : '';
   },
 
-  onClickHeadline() {
-    let contents = document.getElementById(style.contents);
-    let list = document.querySelector('.' + style.list);
+  onClickButton(e) {
+    let modal = document.getElementById(style.modal);
 
-    if (this.state.isOpen) {
-      contents.style.width = '0px';
-      this.setState({
-        isOpen: false
-      });
+    if (this.state.isOpenedModal) {
+      modal.style.display = 'none';
     }
     else {
-      contents.style.width = `${list.offsetWidth}px`;
-      this.setState({
-        isOpen: true
-      });
+      modal.style.display = 'block';
     }
+
+    this.setState({
+      isOpenedModal: (!this.state.isOpenedModal)
+    });
+  },
+
+  onClickOverlay(e) {
+    let modal = document.getElementById(style.modal);
+
+    if (e.target !== modal) return;
+
+    modal.style.display = 'none';
+
+    this.setState({
+      isOpenedModal: false
+    });
   },
 
   render() {
     return(
       <div>
-        <a href="#" onClick={this.onClickHeadline}>テーマを選択する</a>
-        <select>
-          {this.props.theme.map((theme)=>{
-            return (
-              <option value={this.isActive(theme._id)} onClick={this.onClickTheme.bind(this, theme._id)}>{theme.title}</option>
-            )
-          })}
-        </select>
-        <div>
+        <a href="#" onClick={this.onClickButton}>お題を選択してください</a>
+        <div id={style.modal} className={style.modal} onClick={this.onClickOverlay}>
           <ol className={style.list}>
             {this.props.theme.map((theme)=>{
               return (
-                <li className={this.isActive(theme._id)} onClick={this.onClickTheme.bind(this, theme._id)}>{theme.title}</li>
+                <li className={this.isActive(theme._id)} onClick={this.onClickTheme.bind(this, theme._id, theme.title)}>{theme.title}</li>
               )
             })}
           </ol>
