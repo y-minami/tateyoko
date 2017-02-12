@@ -73,9 +73,6 @@ apiRouter.route('/senriu')
 							return 0;
 						});
 
-						console.log(themeIds);
-						console.log(result);
-
 						res.json(result);
 					});
 			});

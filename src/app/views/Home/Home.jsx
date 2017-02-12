@@ -4,6 +4,7 @@ import request from 'superagent';
 import style from './Home.css';
 
 import Theme from './Theme.jsx';
+import Input from './Input.jsx';
 
 const renderCaret = (inputElement, renderElement, caretNum)=>{
   let input = inputElement;
@@ -23,7 +24,11 @@ export default React.createClass({
   getInitialState() {
     return {
       theme: [],
-      themeId: ''
+      themeId: '',
+      author: '',
+      col1: '',
+      col2: '',
+      col3: ''
     };
   },
 
@@ -65,6 +70,7 @@ export default React.createClass({
       case 38:
         caretNum = 0;
         break;
+      // down
       case 40:
         caretNum = e.target.value.length;
         break;
@@ -97,7 +103,7 @@ export default React.createClass({
   },
 
   onClickCol(e) {
-    document.getElementById(e.target.dataset.target).focus();
+    document.getElementById(e.currentTarget.dataset.target).focus();
   },
 
   onBlurCol(e) {
@@ -120,21 +126,46 @@ export default React.createClass({
     });
   },
 
+  onClickNext() {
+    this.props.onChange('fullscreen');
+  },
+
   render() {
     return(
       <div className={style.wrap}>
-        <Theme theme={this.state.theme} onChange={this.onChangeTheme} />
-        <ol className={style.cols}>
-          <li id="col1" data-target="inputCol1" onClick={this.onClickCol}></li>
-          <li id="col2" data-target="inputCol2" onClick={this.onClickCol}></li>
-          <li id="col3" data-target="inputCol3" onClick={this.onClickCol}></li>
-          <li id="author" data-target="inputAuthor" onClick={this.onClickCol}></li>
-        </ol>
-        <input id="inputCol1" data-target="col1" type="text" onInput={this.onInputCol} onKeyDown={this.onKeyDownCol} onBlur={this.onBlurCol} onFocus={this.onFocusCol} />
-        <input id="inputCol2" data-target="col2" type="text" onInput={this.onInputCol} onKeyDown={this.onKeyDownCol} onBlur={this.onBlurCol} onFocus={this.onFocusCol} />
-        <input id="inputCol3" data-target="col3" type="text" onInput={this.onInputCol} onKeyDown={this.onKeyDownCol} onBlur={this.onBlurCol} onFocus={this.onFocusCol} />
-        <input id="inputAuthor" data-target="author" type="text" onInput={this.onInputCol} onKeyDown={this.onKeyDownCol} onBlur={this.onBlurCol} onFocus={this.onFocusCol} />
-        <a href="#" className={style.button} onClick={this.onClickSubmit}>投稿する</a>
+        <div className={style.phase1}>
+          <div>
+            <p>ようこそ、「せんりう」へ。</p>
+            <p>まずはあなたの俳号（ニックネーム）を決めましょう。</p>
+            <p>お題を選んで、心のままにあなたの川柳を詠んでみましょう。</p>
+          </div>
+          <div>
+            <h2>俳号</h2>
+            <Input number="10" />
+          </div>
+          <div>
+            <h2>お題</h2>
+            <Theme theme={this.state.theme} onChange={this.onChangeTheme} />
+          </div>
+          <a href="#" className={style.button} onClick={this.onClickNext}>一句詠む</a>
+        </div>
+        <div className={style.phase2}>
+          <h2>お題「デザイナーあるある」</h2>
+          <div>
+            <div><p></p><input /></div>
+            <div><p></p><input /></div>
+            <div><p></p><input /></div>
+          </div>
+          <ol className={style.cols}>
+            <li id="col1" data-target="inputCol1" onClick={this.onClickCol}></li>
+            <li id="col2" data-target="inputCol2" onClick={this.onClickCol}></li>
+            <li id="col3" data-target="inputCol3" onClick={this.onClickCol}></li>
+          </ol>
+          <input id="inputCol1" data-target="col1" type="text" onInput={this.onInputCol} onKeyDown={this.onKeyDownCol} onBlur={this.onBlurCol} onFocus={this.onFocusCol} />
+          <input id="inputCol2" data-target="col2" type="text" onInput={this.onInputCol} onKeyDown={this.onKeyDownCol} onBlur={this.onBlurCol} onFocus={this.onFocusCol} />
+          <input id="inputCol3" data-target="col3" type="text" onInput={this.onInputCol} onKeyDown={this.onKeyDownCol} onBlur={this.onBlurCol} onFocus={this.onFocusCol} />
+          <a href="#">次へ</a>
+        </div>
       </div>
     )
   }

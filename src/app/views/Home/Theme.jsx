@@ -47,18 +47,23 @@ export default React.createClass({
   render() {
     return(
       <div>
-        <dl className={style.wrap}>
-          <dt onClick={this.onClickHeadline}>テーマを選択する</dt>
-          <dd id={style.contents}>
-            <ol className={style.list}>
-              {this.props.theme.map((theme)=>{
-                return (
-                  <li className={this.isActive(theme._id)} onClick={this.onClickTheme.bind(this, theme._id)}>{theme.title}</li>
-                )
-              })}
-            </ol>
-          </dd>
-        </dl>
+        <a href="#" onClick={this.onClickHeadline}>テーマを選択する</a>
+        <select>
+          {this.props.theme.map((theme)=>{
+            return (
+              <option value={this.isActive(theme._id)} onClick={this.onClickTheme.bind(this, theme._id)}>{theme.title}</option>
+            )
+          })}
+        </select>
+        <div>
+          <ol className={style.list}>
+            {this.props.theme.map((theme)=>{
+              return (
+                <li className={this.isActive(theme._id)} onClick={this.onClickTheme.bind(this, theme._id)}>{theme.title}</li>
+              )
+            })}
+          </ol>
+        </div>
       </div>
     )
   }

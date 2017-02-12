@@ -1,0 +1,25 @@
+:local .col {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #ccc;
+  line-height: 1;
+}
+:local .col input {
+  position: absolute;
+  left: 0;
+  top: -1rem;
+  opacity: 0;
+}
+:local .col span {
+  display: inline-block;
+  border-top: 1px solid #ccc;  
+  width: 3rem;
+  height: 3rem;
+  text-align: center;
+  line-height: 3rem;
+}
+:local .col span:first-child {
+  border-top: none;
+}

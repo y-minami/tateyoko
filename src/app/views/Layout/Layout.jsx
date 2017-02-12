@@ -8,28 +8,55 @@ import style from './Layout.css';
 
 WebFont.load({
   custom: {
-    familes: ['Hannari'],
-    urls: ['https://fonts.googleapis.com/earlyaccess/hannari.css']
+    familes: [
+      'Hannari',
+      'Sawarabi Mincho'
+    ],
+    urls: [
+      'https://fonts.googleapis.com/earlyaccess/hannari.css',
+      'https://fonts.googleapis.com/earlyaccess/sawarabimincho.css'
+    ]
   },
   timeout: 3000
 })
 
 export default React.createClass({
+  getInitialState() {
+    return {
+      screenType: 'default'
+    };
+  },
+
+  onChangeType(type){
+    this.setState({
+      screenType: type
+    });
+  },
+
+  getScreenType() {
+    return (this.state.screenType === 'default') ? style.wrap : style.fullscreen;
+  },
+
   render(){
     return(
-      <div className={style.wrap}>
+      <div className={this.getScreenType()}>
         <header className={style.header}>
           <div className={style.headerInner}>
-            <h1>せんりう</h1>
+            <h1><Link to="/">せんりう</Link></h1>
+            <p className={style.headerShare}>共有</p> 
+          </div>
+        </header>
+        <nav className={style.nav}>
+          <div className={style.navInner}>
             <ul>
-              <li><Link to="/">最初に戻る</Link></li>
-              <li><Link to="/works">作品集</Link></li>
+              <li><Link to="/">一句詠む</Link></li>
+              <li><Link to="/works">川柳一覧</Link></li>
               <li><Link to="/about">このサイトについて</Link></li>
             </ul>
           </div>
-        </header>
+        </nav>
         <div className={style.contents}>
-          {this.props.children || <Home />}
+          {this.props.children || <Home onChange={this.onChangeType} />}
         </div>
       </div>
     )
