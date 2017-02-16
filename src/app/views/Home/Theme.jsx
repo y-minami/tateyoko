@@ -57,7 +57,7 @@ export default React.createClass({
   render() {
     return(
       <div>
-        <a href="#" onClick={this.onClickButton}>お題を選択してください</a>
+        <a className={style.button} href="#" onClick={this.onClickButton}>お題を選択してください</a>
         <div id={style.modal} className={style.modal} onClick={this.onClickOverlay}>
           <ol className={style.list}>
             {this.props.theme.map((theme)=>{

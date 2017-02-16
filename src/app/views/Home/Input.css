@@ -8,17 +8,18 @@
 :local .col input {
   position: absolute;
   left: 0;
-  top: -10rem;
+  top: -30px;
   opacity: 0;
 }
 :local .col span {
   display: inline-block;
-  width: 3rem;
-  height: 3rem;
+  width: 40px;
+  height: 40px;
   margin-top: -1px;
   border: 1px solid #ccc;
   text-align: center;
-  line-height: 3rem;
+  line-height: 40px;
+  vertical-align: top; 
 }
 :local .col span:first-child {
   margin-top: 0;

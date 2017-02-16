@@ -1,5 +1,20 @@
-:local .select {
-  display: none;
+:local .button {
+  display: inline-block;
+  width: 40px;
+  padding: 20px 0;
+  border: 1px solid #ebeadf;
+  background-color: #fff;
+  line-height: 40px;
+}
+:local .button:after {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-top: 10px;
+  border-right: 1px solid #ebeadf;
+  border-bottom: 1px solid #ebeadf;
+  transform: rotate(45deg);
 }
 :local .modal {
   display: none;

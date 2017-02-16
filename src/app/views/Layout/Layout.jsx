@@ -42,8 +42,13 @@ export default React.createClass({
       <div className={this.getScreenType()}>
         <header className={style.header}>
           <div className={style.headerInner}>
-            <h1><Link to="/">せんりう</Link></h1>
-            <p className={style.headerShare}>共有</p> 
+            <h1>せんりう</h1>
+            <Link className={style.headerLink} to="/">一句詠む</Link>
+            <div className={style.headerShare}>
+              <span>
+                <img src="/assets/i_share.svg" width="20" alt="共有する" />
+              </span>
+            </div>
           </div>
         </header>
         <nav className={style.nav}>

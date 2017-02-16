@@ -1,10 +1,41 @@
 :local .wrap {
-  width: 100%;
+  width: 650px;
+  margin: 0 auto;
   height: 100%;
   writing-mode: vertical-rl;
-  padding: 5rem;
+  padding: 100px 0 0;
   box-sizing: border-box;
 }
+:local .description {
+  margin-left: 80px;
+  padding-top: 40px;
+  font-size: 16px;
+}
+:local .description p {
+  line-height: 1.8em;
+}
+:local .stepHeadline {
+  font-size: 20px;
+}
+:local .stepHeadline span {
+  display: inline-block;
+  height: 40px;
+}
+:local .stepLine {
+  margin: 0 10px;
+  padding: 50px 10px 0 100px;
+  border-top: 1px solid #dbdad4;
+}
+:local .button {
+  display: inline-block;
+  width: 40px;
+  margin-right: 25px;
+  padding: 20px 0;
+  border: 1px solid #ebeadf;
+  background-color: #fff;
+  line-height: 40px;
+}
+
 
 :local .cols li {
   margin-right: 1.2em;
@@ -12,14 +43,7 @@
 :local .cols li:first-child {
   margin-right: 0;
 }
-:local .button {
-  display: inline-block;
-  margin-right: 2.4em;
-  padding: 0.8em;
-  background-color: #fff;
-  border: 1px solid #333;
-  font-size: 1.8rem;
-}
+
 :local .phase1 {
 }
 :local .phase2 {

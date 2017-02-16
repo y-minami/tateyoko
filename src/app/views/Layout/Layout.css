@@ -8,13 +8,16 @@ html {
   font-size: 62.5%;
 }
 body {
-  background-color: #eee;
-  font-family: "はんなり明朝", "hannari", "游明朝体", "Yu Mincho", YuMincho, "Sawarabi Mincho", serif;
+  font-family: "はんなり明朝", "hannari", "游明朝体", "Yu Mincho", "YuMincho", "Sawarabi Mincho", serif;
   font-size: 1.6rem;
-  cursor: default;
+  color: #121010;
+  background-image: url(/assets/bg_seikaiha.png);
+  background-size: 112.5px 56.25px;
+  box-shadow:0px 0px 60px 3px #969591 inset;
+  background-color: #f3f2eb;
 }
 a {
-  color: #483d8b;
+  color: #121010;
   text-decoration: none;
 }
 * {
@@ -24,7 +27,7 @@ a {
 
 :local .wrap {
   width: 100%;
-  height: 100%;  
+  height: 100%;
 }
 :local .fullscreen {
   width: 100%;
@@ -51,43 +54,26 @@ a {
   }
 }*/
 :local .headerInner {
-  padding: 3em 2em;
+  padding: 40px 40px 40px 0;
 }
 :local .header h1 {
+  display: inline-block;
+  height: 33%;
   font-size: 3.5rem;
-  font-weight: bold;
-  color: #4b0082;
+}
+:local .headerLink {
+  display: inline-block;
+  height: 33%;
+  text-align: center;
 }
 :local .headerShare {
-  position: absolute;
-  right: 2rem;
-  bottom: 2rem;
-  width: 1rem;
-  height: 1rem;
-  background-color: #ccc;
+  display: inline-block;
+  height: 33%;
+  text-align: right;
+}
+:local .headerShare span {
+  display: block;
   cursor: pointer;
-  overflow: hidden;
-  text-indent: -9999px;
-}
-:local .header li a {
-  display: inline-block;
-  padding: 0 0.8em;
-  opacity: 1;
-  transition: opacity 0.2s;
-}
-:local .header li a:hover {
-  opacity: 0.75;
-}
-:local .header li a:before {
-  font-family: "fontello";
-  content: "\f004";
-  display: inline-block;
-  font-size: 1.2rem;
-  margin-bottom: 0.25em;
-  transition: margin 0.2s linear;
-}
-:local .header li a:hover:before {
-  margin-bottom: 0.4em;
 }
 
 /* contents */
@@ -109,7 +95,7 @@ a {
   writing-mode: vertical-rl;
 }
 :local .navInner {
-  padding: 2rem;
+  padding: 40px 0 40px 40px;
 }
 :local .nav li {
   display: inline-block;
