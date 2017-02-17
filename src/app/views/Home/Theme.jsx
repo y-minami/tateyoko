@@ -1,4 +1,5 @@
 import React from 'react';
+import Velocity from 'velocity-animate';
 
 import style from './Theme.css';
 
@@ -30,15 +31,17 @@ export default React.createClass({
   onClickButton(e) {
     let modal = document.getElementById(style.modal);
 
-    if (this.state.isOpenedModal) {
-      modal.style.display = 'none';
-    }
-    else {
-      modal.style.display = 'block';
-    }
+    modal.style.display = 'block';
+    modal.style.opacity = 0;
 
-    this.setState({
-      isOpenedModal: (!this.state.isOpenedModal)
+    Velocity(modal, {
+      opacity: 1
+    },{
+      complete: ()=>{
+        this.setState({
+          isOpenedModal: (!this.state.isOpenedModal)
+        });
+      }
     });
   },
 
@@ -47,10 +50,16 @@ export default React.createClass({
 
     if (e.target !== modal) return;
 
-    modal.style.display = 'none';
+    Velocity(modal, {
+      opacity: 0
+    },{
+      complete: ()=>{
+        modal.style.display = 'none';
 
-    this.setState({
-      isOpenedModal: false
+        this.setState({
+          isOpenedModal: false
+        });
+      }
     });
   },
 

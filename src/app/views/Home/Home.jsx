@@ -23,6 +23,8 @@ export default React.createClass({
   },
 
   componentDidMount() {
+    this.props.onChange('fullscreen');
+    
     request
       .get('/api/theme')
       .end((err, res)=>{
@@ -117,16 +119,18 @@ export default React.createClass({
             <span>三</span>詠む
           </h2>
           <div>
-            <a href="#" className={style.button} onClick={this.onClickNextPhase2}>一句詠む</a>
+            <a href="#" className={style.btnRead} onClick={this.onClickNextPhase2}>一句詠む</a>
           </div>
         </div>
         <div id={style.phase2} className={style.phase2}>
-          <h2>お題「{this.state.themeTitle}」</h2>
-          <ol className={style.cols}>
-            <li><Col1 id="col1" number="5" onChange={this.setValue} /></li>
-            <li><Col2 id="col2" number="7" onChange={this.setValue} /></li>
-            <li><Col3 id="col3" number="5" onChange={this.setValue} /></li>
-          </ol>
+          <div className={style.senriu}>
+            <ol className={style.cols}>
+              <li><Col1 id="col1" number="5" onChange={this.setValue} /></li>
+              <li><Col2 id="col2" number="7" onChange={this.setValue} /></li>
+              <li><Col3 id="col3" number="5" onChange={this.setValue} /></li>
+            </ol>
+            <p className={style.authorInitial}>和</p>
+          </div>
           <ul className={style.nav}>
             <li><a href="#" onClick={this.onClickBackPhase1}>詠むのをやめる</a></li>
             <li><a href="#" onClick={this.onClickNextView}>次へ</a></li>

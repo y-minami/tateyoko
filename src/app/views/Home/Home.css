@@ -3,8 +3,11 @@
   margin: 0 auto;
   height: 100%;
   writing-mode: vertical-rl;
-  padding: 100px 0 0;
   box-sizing: border-box;
+}
+:local .phase1 {
+  display: none;
+  padding: 100px 0 0;
 }
 :local .description {
   margin-left: 80px;
@@ -26,7 +29,7 @@
   padding: 50px 10px 0 100px;
   border-top: 1px solid #dbdad4;
 }
-:local .button {
+:local .btnRead {
   display: inline-block;
   width: 40px;
   margin-right: 25px;
@@ -35,17 +38,54 @@
   background-color: #fff;
   line-height: 40px;
 }
-
+:local .selectTheme {
+  position: fixed;
+  right: 40px;
+  top: 40px;
+  font-size: 24px;
+  line-height: 50px;
+  background-color: #fff;
+  padding: 20px 0 10px;
+}
+:local .selectTheme span {
+  display: inline-block;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+:local .phase2 {
+  /*display: none;*/
+}
+:local .senriu {
+  width: 295px;
+  height: 640px;
+  padding: 50px 60px 100px;
+  border: 8px solid #34495e;
+  background-color: #fff;
+  background-image: url(/assets/bg_chidori.png);
+  background-size: 200px;
+  writing-mode: vertical-rl;
+}
+:local .authorInitial {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  background-color: #fb400b;
+  color: #fff;
+  font-size: 35px;
+  border-radius: 2px;
+  line-height: 35px;
+}
 
 :local .cols li {
   margin-right: 1.2em;
+  line-height: 0;
 }
-:local .cols li:first-child {
+:local .cols li:nth-child(1) {
   margin-right: 0;
 }
-
-:local .phase1 {
+:local .cols li:nth-child(2) {
+  margin-top: 40px;
 }
-:local .phase2 {
-  display: none;
+:local .cols li:nth-child(3) {
+  margin-top: 160px;
 }
