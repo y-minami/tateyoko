@@ -4,6 +4,7 @@
   overflow: hidden;
   background: #fff;
   line-height: 1;
+  writing-mode: vertical-rl;
 }
 :local .col input {
   position: absolute;
@@ -19,7 +20,8 @@
   border: 1px solid #ccc;
   text-align: center;
   line-height: 40px;
-  vertical-align: top; 
+  vertical-align: top;
+  transition: border .5s;
 }
 :local .col span:first-child {
   margin-top: 0;
@@ -29,4 +31,7 @@
 }
 :local .col .current + span {
   border-top: 1px solid #333;
+}
+:local .col.off span {
+  border: 1px solid transparent;
 }

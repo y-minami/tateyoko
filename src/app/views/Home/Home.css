@@ -1,33 +1,39 @@
 :local .wrap {
   width: 650px;
   margin: 0 auto;
-  height: 100%;
-  writing-mode: vertical-rl;
   box-sizing: border-box;
 }
 :local .phase1 {
-  display: none;
+  overflow: hidden;
   padding: 100px 0 0;
 }
 :local .description {
+  float: right;
+  min-height: 500px;
   margin-left: 80px;
   padding-top: 40px;
-  font-size: 16px;
+  font-size: 1.6rem;
+  writing-mode: vertical-rl;
 }
 :local .description p {
   line-height: 1.8em;
 }
 :local .stepHeadline {
-  font-size: 20px;
+  float: right;
+  font-size: 2rem;
+  writing-mode: vertical-rl;
 }
 :local .stepHeadline span {
   display: inline-block;
   height: 40px;
 }
 :local .stepLine {
+  float: right;
   margin: 0 10px;
   padding: 50px 10px 0 100px;
+  min-height: 550px;
   border-top: 1px solid #dbdad4;
+  writing-mode: vertical-rl;
 }
 :local .btnRead {
   display: inline-block;
@@ -37,27 +43,33 @@
   border: 1px solid #ebeadf;
   background-color: #fff;
   line-height: 40px;
+  writing-mode: vertical-rl;
 }
 :local .selectTheme {
   position: fixed;
   right: 40px;
   top: 40px;
-  font-size: 24px;
+  font-size: 2.4rem;
   line-height: 50px;
   background-color: #fff;
   padding: 20px 0 10px;
+  writing-mode: vertical-rl;
 }
 :local .selectTheme span {
   display: inline-block;
-  font-size: 16px;
+  font-size: 1.6rem;
   margin-bottom: 10px;
 }
 :local .phase2 {
-  /*display: none;*/
+  display: none;
+}
+:local .senriuWrap {
+  padding-top: 40px;
 }
 :local .senriu {
+  position: relative;
   width: 295px;
-  height: 640px;
+  margin: 0 auto;
   padding: 50px 60px 100px;
   border: 8px solid #34495e;
   background-color: #fff;
@@ -67,11 +79,14 @@
 }
 :local .authorInitial {
   display: inline-block;
+  position: absolute;
+  left: 30px;
+  bottom: 30px;
   width: 35px;
   height: 35px;
   background-color: #fb400b;
   color: #fff;
-  font-size: 35px;
+  font-size: 3.5rem;
   border-radius: 2px;
   line-height: 35px;
 }
@@ -88,4 +103,57 @@
 }
 :local .cols li:nth-child(3) {
   margin-top: 160px;
+}
+
+:local .nav1 .backPahse1 {
+  position: fixed;
+  left: 40px;
+  top: 40px;
+  display: inline-block;
+  font-size: 1.2rem;
+  line-height: 1;
+  background-color: #fff;
+  padding: 10px 5px;
+  writing-mode: vertical-rl;
+}
+:local .nav1 .nextView {
+  position: fixed;
+  left: 40px;
+  bottom: 40px;
+  display: inline-block;
+  font-size: 1.2rem;
+  line-height: 1;
+  background-color: #fff;
+  padding: 10px 5px;
+  writing-mode: vertical-rl;
+}
+:local .nav2 .backPhase2 {
+  position: fixed;
+  display: block;
+  width: 130px;
+  height: 130px;
+  left: 50%;
+  top: 50%;
+  margin: -65px 0 0 270px;
+  background-color: #fff;
+  line-height:130px;
+  text-align: center;
+  border-radius: 50%;
+  border: 1px solid #ebeadf;
+  writing-mode: vertical-rl;
+}
+:local .nav2 .submit {
+  position: fixed;
+  display: block;
+  width: 130px;
+  height: 130px;
+  left: 50%;
+  top: 50%;
+  margin: -65px 0 0 -400px;
+  background-color: #fff;
+  line-height: 130px;
+  text-align: center;
+  border-radius: 50%;
+  border: 1px solid #ebeadf;
+  writing-mode: vertical-rl;
 }

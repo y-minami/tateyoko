@@ -36,7 +36,8 @@ const Column = React.createClass({
 
 export default React.createClass({
   propTypes: {
-    number: React.PropTypes.number
+    number: React.PropTypes.number,
+    active: React.PropTypes.bool
   },
 
   getInitialState() {
@@ -46,7 +47,9 @@ export default React.createClass({
     };
   },
 
-  onClickCol(e) {
+  onClickCol() {
+    if (this.props.active === false) return;
+
     this.hiddenInput.focus();
   },
 
@@ -113,9 +116,14 @@ export default React.createClass({
     });
   },
 
+  changeClass() {
+    return (this.props.active) ? style.col : `${style.col} ${style.off}`;
+
+  },
+
   render() {
     return(
-      <div className={style.col}>
+      <div className={this.changeClass()}>
         <div onClick={this.onClickCol}>
           <Column number={this.props.number} value={this.state.value} current={this.state.current} />
         </div>

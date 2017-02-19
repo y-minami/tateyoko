@@ -5,6 +5,7 @@
   border: 1px solid #ebeadf;
   background-color: #fff;
   line-height: 40px;
+  writing-mode: vertical-rl;
 }
 :local .button:after {
   content: "";
@@ -32,6 +33,7 @@
   display: inline-block;
   border: 1px solid #333;
   background: #fff;
+  writing-mode: vertical-rl;
 }
 :local .list li {
   padding: 1.5rem;
