@@ -5,3 +5,60 @@
   padding: 5rem;
   box-sizing: border-box;
 }
+
+
+:local .senriuWrap {
+  position: fixed;
+  top: 40px;
+  left: 50%;
+  margin-left: -148px;
+}
+:local .senriu {
+  position: relative;
+  width: 295px;
+  margin: 0 auto;
+  padding: 50px 60px 100px;
+  border: 8px solid #34495e;
+  background-color: #fff;
+  background-image: url(/assets/bg_chidori.png);
+  background-size: 200px;
+  writing-mode: vertical-rl;
+}
+:local .authorInitial {
+  display: inline-block;
+  position: absolute;
+  left: 30px;
+  bottom: 30px;
+  width: 35px;
+  height: 35px;
+  background-color: #fb400b;
+  color: #fff;
+  font-size: 3.5rem;
+  border-radius: 2px;
+  line-height: 35px;
+}
+
+:local .cols li {
+  margin-right: 1.2em;
+  line-height: 0;
+}
+:local .cols li:nth-child(1) {
+  margin-right: 0;
+}
+:local .cols li:nth-child(2) {
+  margin-top: 40px;
+}
+:local .cols li:nth-child(3) {
+  margin-top: 160px;
+}
+:local .cols span {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  margin-top: -1px;
+  border: 1px solid transparent;
+  text-align: center;
+  line-height: 40px;
+  vertical-align: top;
+  font-size: 26px;
+}

@@ -22,6 +22,7 @@
   line-height: 40px;
   vertical-align: top;
   transition: border .5s;
+  font-size: 26px;
 }
 :local .col span:first-child {
   margin-top: 0;

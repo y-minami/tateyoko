@@ -37,7 +37,8 @@ const Column = React.createClass({
 export default React.createClass({
   propTypes: {
     number: React.PropTypes.number,
-    active: React.PropTypes.bool
+    active: React.PropTypes.bool,
+    isNull: React.PropTypes.bool
   },
 
   getInitialState() {
@@ -118,7 +119,6 @@ export default React.createClass({
 
   changeClass() {
     return (this.props.active) ? style.col : `${style.col} ${style.off}`;
-
   },
 
   render() {

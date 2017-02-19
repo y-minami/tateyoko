@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 import request from 'superagent';
 import Velocity from 'velocity-animate';
 
@@ -35,6 +36,26 @@ export default React.createClass({
       });
   },
 
+  fadeIn(dom) {
+    dom.style.display = 'block';
+    dom.style.opacity = 0;
+
+    Velocity(dom, {
+      opacity: 1
+    });
+  },
+
+  fadeOut(dom) {
+    Velocity(dom, {
+      opacity: 0
+    },{
+      complete: ()=>{
+        dom.style.display = 'none';
+      }
+    });
+
+  },
+
   onChangeTheme(themeId, themeTitle) {
     this.setState({
       themeId,
@@ -46,28 +67,22 @@ export default React.createClass({
     // layoutのclass変更
     this.props.onChange('fullscreen');
 
+    // 入力枠を初期化
+    this.setState({
+      isSenriuActive: true
+    });
+
     let phase1 = document.getElementById(style.phase1);
-    let phase2 = document.getElementById(style.phase2);
-    let nav1   = document.getElementById(style.nav1);
-    let nav2   = document.getElementById(style.nav2);
+    let senriu = document.getElementById(style.senriu);
+    let selectTheme = document.getElementById(style.selectTheme);
+    let backPhase1 = document.getElementById(style.backPhase1);
+    let nextView = document.getElementById(style.nextView);
 
-    Velocity(phase1, {
-      opacity: 0
-    },{
-      complete: ()=>{
-        phase1.style.display = 'none';
-      }
-    });
-
-    nav1.style.display = 'block';
-    nav2.style.display = 'none';
-
-    phase2.style.display = 'block';
-    phase2.style.opacity = 0;
-
-    Velocity(phase2, {
-      opacity: 1
-    });
+    this.fadeOut(phase1);
+    this.fadeIn(backPhase1);
+    this.fadeIn(nextView);
+    this.fadeIn(senriu);
+    this.fadeIn(selectTheme);
   },
 
   onClickBackPhase1() {
@@ -75,34 +90,71 @@ export default React.createClass({
     this.props.onChange('default');
 
     let phase1 = document.getElementById(style.phase1);
-    let phase2 = document.getElementById(style.phase2);
+    let senriu = document.getElementById(style.senriu);
+    let selectTheme = document.getElementById(style.selectTheme);
+    let backPhase1 = document.getElementById(style.backPhase1);
+    let nextView = document.getElementById(style.nextView);
 
-    Velocity(phase2, {
-      opacity: 0
-    },{
-      complete: ()=>{
-        phase2.style.display = 'none';
-      }
-    });
+    this.fadeOut(senriu);
+    this.fadeOut(selectTheme);
+    this.fadeOut(backPhase1);
+    this.fadeOut(nextView);
 
-    phase1.style.display = 'block';
-    phase1.style.opacity = 0;
-
-    Velocity(phase1, {
-      opacity: 1
-    });
-
-
+    this.fadeIn(phase1);
   },
 
   onClickNextView() {
+    // layoutのclass変更
+    this.props.onChange('default');
+
+    // 川柳の枠を削除
     this.setState({
       isSenriuActive: false
     });
+
+    // fadein
+    let backPhase2 = document.getElementById(style.backPhase2);
+    let submit =  document.getElementById(style.submit);
+
+    this.fadeIn(backPhase2);
+    this.fadeIn(submit);
+
+    // fadeout
+    let selectTheme = document.getElementById(style.selectTheme);
+    let backPhase1 = document.getElementById(style.backPhase1);
+    let nextView = document.getElementById(style.nextView);
+
+    this.fadeOut(selectTheme);
+    this.fadeOut(backPhase1);
+    this.fadeOut(nextView);
   },
 
   onClickBackPhase2() {
-    
+    // layoutのclass変更
+    this.props.onChange('fullscreen');
+
+    // 入力枠を初期化
+    this.setState({
+      isSenriuActive: true
+    });
+
+    // fadein
+    let senriu = document.getElementById(style.senriu);
+    let selectTheme = document.getElementById(style.selectTheme);
+    let backPhase1 = document.getElementById(style.backPhase1);
+    let nextView = document.getElementById(style.nextView);
+
+    this.fadeIn(backPhase1);
+    this.fadeIn(nextView);
+    this.fadeIn(senriu);
+    this.fadeIn(selectTheme);
+
+    // fadeout
+    let backPhase2 = document.getElementById(style.backPhase2);
+    let submit =  document.getElementById(style.submit);
+
+    this.fadeOut(backPhase2);
+    this.fadeOut(submit);
   },
 
   onClickSubmit(e) {
@@ -118,6 +170,7 @@ export default React.createClass({
         themeId: this.state.themeId
       })
       .end((err, res)=>{
+        location.href = '/work/' + res.body.urlId;
       });
   },
 
@@ -164,7 +217,7 @@ export default React.createClass({
           </div>
         </div>
         <div id={style.phase2} className={style.phase2}>
-          <h2 className={style.selectTheme}>
+          <h2 id={style.selectTheme} className={style.selectTheme}>
             <span>お題</span>「{this.state.themeTitle}」
           </h2>
           <div className={style.senriuWrap}>
@@ -178,12 +231,12 @@ export default React.createClass({
             </div>
           </div>
           <ul id={style.nav1} className={style.nav1}>
-            <li><a href="#" className={style.backPahse1} onClick={this.onClickBackPhase1}>詠むのをやめる</a></li>
-            <li><a href="#" className={style.nextView} onClick={this.onClickNextView}>次へ</a></li>
+            <li><a href="#" id={style.backPhase1} className={style.backPhase1} onClick={this.onClickBackPhase1}>詠むのをやめる</a></li>
+            <li><a href="#" id={style.nextView} className={style.nextView} onClick={this.onClickNextView}>次へ</a></li>
           </ul>
           <ul id={style.nav2} className={style.nav2}>
-            <li><a href="#" className={style.backPhase2} onClick={this.onClickBackPhase2}>詠み直す</a></li>
-            <li><a href="#" className={style.submit} onClick={this.onClickSubmit}>投稿する</a></li>
+            <li><a href="#" id={style.backPhase2} className={style.backPhase2} onClick={this.onClickBackPhase2}>詠み直す</a></li>
+            <li><a href="#" id={style.submit} className={style.submit} onClick={this.onClickSubmit}>投稿する</a></li>
           </ul>
         </div>
       </div>

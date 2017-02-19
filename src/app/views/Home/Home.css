@@ -46,6 +46,7 @@
   writing-mode: vertical-rl;
 }
 :local .selectTheme {
+  display: none;
   position: fixed;
   right: 40px;
   top: 40px;
@@ -60,13 +61,15 @@
   font-size: 1.6rem;
   margin-bottom: 10px;
 }
-:local .phase2 {
-  display: none;
-}
+
 :local .senriuWrap {
-  padding-top: 40px;
+  position: fixed;
+  top: 40px;
+  left: 50%;
+  margin-left: -148px;
 }
 :local .senriu {
+  display: none;
   position: relative;
   width: 295px;
   margin: 0 auto;
@@ -105,11 +108,11 @@
   margin-top: 160px;
 }
 
-:local .nav1 .backPahse1 {
+:local .nav1 .backPhase1 {
+  display: none;
   position: fixed;
   left: 40px;
   top: 40px;
-  display: inline-block;
   font-size: 1.2rem;
   line-height: 1;
   background-color: #fff;
@@ -117,10 +120,10 @@
   writing-mode: vertical-rl;
 }
 :local .nav1 .nextView {
+  display: none;
   position: fixed;
   left: 40px;
   bottom: 40px;
-  display: inline-block;
   font-size: 1.2rem;
   line-height: 1;
   background-color: #fff;
@@ -128,8 +131,8 @@
   writing-mode: vertical-rl;
 }
 :local .nav2 .backPhase2 {
+  display: none;
   position: fixed;
-  display: block;
   width: 130px;
   height: 130px;
   left: 50%;
@@ -143,8 +146,8 @@
   writing-mode: vertical-rl;
 }
 :local .nav2 .submit {
+  display: none;
   position: fixed;
-  display: block;
   width: 130px;
   height: 130px;
   left: 50%;

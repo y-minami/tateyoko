@@ -36,6 +36,7 @@ apiRouter.route('/senriu')
 	.post((req, res)=>{
 		let senriu = new Senriu();
 
+
 		senriu.author = req.body.author;
 		senriu.col1 = req.body.col1;
 		senriu.col2 = req.body.col2;
@@ -49,7 +50,7 @@ apiRouter.route('/senriu')
 			}
 
 			res.json({
-				message: 'created senriu'
+				urlId: senriu.urlId
 			});
 		});
 	})
