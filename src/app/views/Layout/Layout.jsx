@@ -23,7 +23,8 @@ WebFont.load({
 export default React.createClass({
   getInitialState() {
     return {
-      screenType: 'default'
+      screenType: 'default',
+      page: '一句詠む'
     };
   },
 
@@ -33,8 +34,43 @@ export default React.createClass({
     });
   },
 
+  onChangePage(page){
+    this.setState({
+      page: page
+    });
+  },
+
   getScreenType() {
     return (this.state.screenType === 'default') ? style.wrap : style.fullscreen;
+  },
+
+  componentDidMount() {
+    this.updatePage(this.props.location.pathname);
+  },
+  componentWillReceiveProps(nextProps) {
+    this.updatePage(nextProps.location.pathname);
+  },
+  updatePage(pathname) {
+    const pageNameObj = {
+      home: '一句詠む',
+      about: 'このサイトについて',
+      work: '川柳一覧'
+    };
+    let key;
+
+    if (/^\/work/.test(pathname)) {
+      key = 'work';
+    }
+    else if (/^\/about/.test(pathname)) {
+      key = 'about';
+    }
+    else {
+      key = 'home';
+    }
+
+    this.setState({
+      page: pageNameObj[key]
+    });
   },
 
   render(){
@@ -43,7 +79,7 @@ export default React.createClass({
         <header className={style.header}>
           <div className={style.headerInner}>
             <h1>せんりう</h1>
-            <Link className={style.headerLink} to="/">一句詠む</Link>
+            <h2 className={style.pageTitle}>{this.state.page}</h2>
             <div className={style.headerShare}>
               <span>
                 <img src="/assets/i_share.svg" width="20" alt="共有する" />
@@ -55,7 +91,7 @@ export default React.createClass({
           <div className={style.navInner}>
             <ul>
               <li><Link to="/">一句詠む</Link></li>
-              <li><Link to="/works">川柳一覧</Link></li>
+              <li><Link to="/work/#">川柳一覧</Link></li>
               <li><Link to="/about">このサイトについて</Link></li>
             </ul>
           </div>

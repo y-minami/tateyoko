@@ -13,7 +13,7 @@ ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={Layout}>
       <Route path="/about" component={About} />
-      <Route path="/works" component={Works} />
+      <Route path="/work" component={Work} />
       <Route path="/work/:urlId" component={Work} />
       <Route path="*" component={NoMatch} />
     </Route>

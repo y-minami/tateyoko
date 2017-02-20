@@ -16,6 +16,36 @@ body {
   box-shadow:0px 0px 60px 3px #969591 inset;
   background-color: #f3f2eb;
 }
+
+body {
+  background-color: #f3f2eb;
+  background-image: url(/assets/bg_seikaiha.png);
+  background-size: 112.5px 56.25px;
+  background-position: left center;
+}
+
+body:before {
+   content: "";
+   position: absolute;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   background-image: linear-gradient(#f3f2eb  50%, transparent 100%);
+   opacity: 1;
+}
+
+body:after {
+   content: "";
+   position: absolute;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   background-image: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 200%);
+}
+
+
 a {
   color: #121010;
   text-decoration: none;
@@ -60,7 +90,7 @@ a {
   height: 33%;
   font-size: 3.5rem;
 }
-:local .headerLink {
+:local .pageTitle {
   display: inline-block;
   height: 33%;
   text-align: center;

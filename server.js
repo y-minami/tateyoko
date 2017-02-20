@@ -36,7 +36,6 @@ apiRouter.route('/senriu')
 	.post((req, res)=>{
 		let senriu = new Senriu();
 
-
 		senriu.author = req.body.author;
 		senriu.col1 = req.body.col1;
 		senriu.col2 = req.body.col2;
@@ -55,8 +54,10 @@ apiRouter.route('/senriu')
 		});
 	})
 	.get((req, res)=>{
+    let query = req.query;
+
 		Senriu
-			.find()
+			.find(query)
 			.sort('update')
 			.exec((err, senriu)=>{
 				Theme
@@ -95,6 +96,14 @@ apiRouter.route('/senriu/:urlId')
 			res.json(senriu);
 		});
 	});
+
+apiRouter.route('/latestSenriu')
+  .get((req, res)=>{
+    Senriu.findOne({}, {}, {sort: {'update': -1}}).exec((err, senriu)=> {
+      if (err) res.send(err);
+      res.json(senriu);
+    });
+  });
 
 apiRouter.route('/theme')
 	.get((req, res)=>{
