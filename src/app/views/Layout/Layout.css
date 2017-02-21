@@ -22,28 +22,39 @@ body {
   background-image: url(/assets/bg_seikaiha.png);
   background-size: 112.5px 56.25px;
   background-position: left center;
+  animation: bg_move 5s linear infinite;
 }
 
 body:before {
-   content: "";
-   position: absolute;
-   top: 0;
-   right: 0;
-   bottom: 0;
-   left: 0;
-   background-image: linear-gradient(#f3f2eb  50%, transparent 100%);
-   opacity: 1;
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(#f3f2eb  50%, transparent 100%);
+  opacity: 1;
+  transition: opacity 0.5s cubic-bezier(.4, 0, .2, 1);;
+}
+body:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 200%);
+}
+@keyframes bg_move {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 112.5px center;
+  }
 }
 
-body:after {
-   content: "";
-   position: absolute;
-   top: 0;
-   right: 0;
-   bottom: 0;
-   left: 0;
-   background-image: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 200%);
-}
+
 
 
 a {
@@ -54,6 +65,10 @@ a {
   box-sizing: border-box;
 }
 
+#app {
+  position: relative;
+  z-index: 5;
+}
 
 :local .wrap {
   width: 100%;
@@ -115,6 +130,7 @@ a {
 /* navigation */
 :local .nav {
   position: fixed;
+  z-index: 2;
   left: 0;
   top: 0;
   height: 100%;

@@ -1,3 +1,8 @@
+:local .headline {
+  float: right;
+  color: #fff;
+  writing-mode: vertical-rl;
+}
 :local .button {
   display: inline-block;
   width: 40px;
@@ -5,7 +10,6 @@
   border: 1px solid #ebeadf;
   background-color: #fff;
   line-height: 40px;
-  writing-mode: vertical-rl;
 }
 :local .button:after {
   content: "";

@@ -54,7 +54,8 @@ export default React.createClass({
     const pageNameObj = {
       home: '一句詠む',
       about: 'このサイトについて',
-      work: '川柳一覧'
+      work: '川柳一覧',
+      noMatch: '四〇四'
     };
     let key;
 
@@ -64,8 +65,11 @@ export default React.createClass({
     else if (/^\/about/.test(pathname)) {
       key = 'about';
     }
-    else {
+    else if (/^\/$/.test(pathname)) {
       key = 'home';
+    }
+    else {
+      key = 'noMatch';
     }
 
     this.setState({

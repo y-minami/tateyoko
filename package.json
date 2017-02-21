@@ -30,6 +30,7 @@
     "browser-sync": "^2.18.5",
     "css-loader": "^0.26.1",
     "express": "^4.14.0",
+    "lodash.find": "^4.6.0",
     "method-override": "^2.3.7",
     "mongoose": "^4.7.7",
     "postcss-custom-media": "^5.0.1",

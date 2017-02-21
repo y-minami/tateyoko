@@ -3,6 +3,7 @@ import request from 'superagent';
 
 import style from './Work.css';
 
+import Theme from './Theme.jsx';
 import ThemeSenriu from './ThemeSenriu.jsx';
 
 export default React.createClass({
@@ -12,7 +13,7 @@ export default React.createClass({
       col2: '',
       col3: '',
       author: '',
-      themeSenriu: []
+      themeId: ''
     };
   },
 
@@ -39,10 +40,11 @@ export default React.createClass({
           }
 
           this.setState({
-            col1: this.getSpanString(res.body.col1),
-            col2: this.getSpanString(res.body.col2),
-            col3: this.getSpanString(res.body.col3),
-            author: res.body.author
+            col1: res.body.col1,
+            col2: res.body.col2,
+            col3: res.body.col3,
+            author: res.body.author,
+            themeId: res.body.themeId
           });
         });
     }
@@ -56,26 +58,14 @@ export default React.createClass({
           }
 
           this.setState({
-            col1: this.getSpanString(res.body.col1),
-            col2: this.getSpanString(res.body.col2),
-            col3: this.getSpanString(res.body.col3),
-            author: res.body.author
+            col1: res.body.col1,
+            col2: res.body.col2,
+            col3: res.body.col3,
+            author: res.body.author,
+            themeId: res.body.themeId
           });
         });
     }
-
-    request
-      .get('/api/senriu')
-      .end((err, res)=>{
-        if (err) {
-          console.log(err);
-          return;
-        }
-
-        this.setState({
-          themeSenriu: res.body
-        });
-      });
   },
 
   getSpanString(string) {
@@ -84,22 +74,30 @@ export default React.createClass({
     });
   },
 
+  onChangeTheme(themeId) {
+    this.setState({
+      themeId
+    });
+  },
+
   render() {
     return(
       <div className={style.wrap}>
-        <h2>「{this.state.author}」<span>作</span></h2>
+        <h2 className={style.author}>「{this.state.author}」<span>作</span></h2>
         <div className={style.senriuWrap}>
           <div id={style.senriu} className={style.senriu}>
             <ol className={style.cols}>
-              <li>{this.state.col1}</li>
-              <li>{this.state.col2}</li>
-              <li>{this.state.col3}</li>
+              <li>{this.getSpanString(this.state.col1)}</li>
+              <li>{this.getSpanString(this.state.col2)}</li>
+              <li>{this.getSpanString(this.state.col3)}</li>
             </ol>
             <p className={style.authorInitial}>{this.state.author.split('')[0]}</p>
           </div>
         </div>
-        <ThemeSenriu themeSenriu={this.state.themeSenriu} />
-
+        <div className={style.themeSenriuWrap}>
+          <Theme themeId={this.state.themeId} onChange={this.onChangeTheme} />
+          <ThemeSenriu themeId={this.state.themeId} />
+        </div>
       </div>
     )
   }
