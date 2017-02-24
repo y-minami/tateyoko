@@ -98,7 +98,7 @@ export default React.createClass({
 
   render() {
     return(
-      <div>
+      <div className={style.wrap}>
         <h3 className={style.headline}>お題<a className={style.button} href="#" onClick={this.onClickButton}>{this.state.themeText}</a>で詠まれた川柳</h3>
         <div id={style.modal} className={style.modal} onClick={this.onClickOverlay}>
           <ol className={style.list}>

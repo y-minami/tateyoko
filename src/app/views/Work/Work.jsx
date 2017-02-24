@@ -27,6 +27,8 @@ export default React.createClass({
 
   componentDidMount(){
     this.update();
+
+    this.props.onChange('fullscreen');
   },
 
   update() {
@@ -96,7 +98,7 @@ export default React.createClass({
         </div>
         <div className={style.themeSenriuWrap}>
           <Theme themeId={this.state.themeId} onChange={this.onChangeTheme} />
-          <ThemeSenriu themeId={this.state.themeId} />
+          <ThemeSenriu themeId={this.state.themeId} selected={this.props.params.urlId} />
         </div>
       </div>
     )

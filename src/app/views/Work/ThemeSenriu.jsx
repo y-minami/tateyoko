@@ -7,6 +7,7 @@ import style from './ThemeSenriu.css';
 
 export default React.createClass({
   propTypes: {
+    selected: React.PropTypes.string,
     themeId: React.PropTypes.string
   },
 
@@ -34,8 +35,8 @@ export default React.createClass({
       });
   },
 
-  changeSenriuState() {
-    return (true) ? `${style.senriu} ${style.senriuActive}` : style.senriu;
+  changeSenriuState(urlId) {
+    return (this.props.selected === urlId) ? `${style.senriu} ${style.senriuActive}` : style.senriu;
   },
 
   render() {
@@ -43,7 +44,7 @@ export default React.createClass({
       <div className={style.wrap}>
         {this.state.themeSenriu.map((senriu)=>{
           return (
-            <div className={this.changeSenriuState()}>
+            <div className={this.changeSenriuState(senriu.urlId)}>
               <Link to={`/work/${senriu.urlId}`}>
                 <ol className={style.cols}>
                   <li>{senriu.col1}</li>

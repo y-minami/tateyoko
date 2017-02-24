@@ -13,10 +13,8 @@
   font-size: 16px;
 }
 :local .senriuWrap {
-  position: fixed;
-  top: 40px;
-  left: 50%;
-  margin-left: -148px;
+  float: right;
+  margin-right: 30px;
 }
 :local .senriu {
   position: relative;

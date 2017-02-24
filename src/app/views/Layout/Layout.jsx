@@ -101,7 +101,10 @@ export default React.createClass({
           </div>
         </nav>
         <div className={style.contents}>
-          {this.props.children || <Home onChange={this.onChangeType} />}
+          {React.cloneElement(
+            this.props.children,
+            {onChange: this.onChangeType}
+          )}
         </div>
       </div>
     )

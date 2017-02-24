@@ -1,11 +1,14 @@
-:local .headline {
+:local .wrap {
   float: right;
+}
+:local .headline {
   color: #fff;
   writing-mode: vertical-rl;
 }
 :local .button {
   display: inline-block;
   width: 40px;
+  margin: 20px 0;
   padding: 20px 0;
   border: 1px solid #ebeadf;
   background-color: #fff;
