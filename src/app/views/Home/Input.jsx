@@ -64,8 +64,12 @@ export default React.createClass({
 
   onKeyUpCol(e) {
     // move caret
-    this.hiddenInput.setSelectionRange(this.state.current, this.state.current);
-
+    switch (e.keyCode) {
+      case 38:
+      case 40:
+        this.hiddenInput.setSelectionRange(this.state.current, this.state.current);
+        break;
+    }
     // Homeに伝達
     this.props.onChange(this.props.id, this.state.value);
   },
@@ -107,13 +111,20 @@ export default React.createClass({
 
   onBlurCol(e) {
     this.setState({
-      current: -1
+      current: -1,
+      value: e.target.value.slice(0, this.props.number)
+    }, ()=>{
+      this.props.onChange(this.props.id, this.state.value);
     });
   },
 
   onFocusCol(e) {
+    e.target.value = this.state.value;
+
     this.setState({
       current: this.state.value.length
+    }, ()=>{
+      this.hiddenInput.setSelectionRange(this.state.current, this.state.current);
     });
   },
 

@@ -24,57 +24,41 @@ export default React.createClass({
   getInitialState() {
     return {
       screenType: 'default',
-      page: '一句詠む'
+      page: '一句詠む',
+      selected: '/'
     };
   },
 
-  onChangeType(type){
+  changeLayout(type){
     this.setState({
       screenType: type
+    }, ()=>{
+
+    });
+
+    window.scrollTo(0, 1);
+  },
+
+  changePageTitle(title) {
+    this.setState({
+      page: title
     });
   },
 
-  onChangePage(page){
+  changeNavActive(selected) {
     this.setState({
-      page: page
+      selected: selected
     });
+
+    window.scrollTo(0, 1);
   },
 
   getScreenType() {
-    return (this.state.screenType === 'default') ? style.wrap : style.fullscreen;
+    return (this.state.screenType === 'default') ? style.wrap : style[this.state.screenType];
   },
 
-  componentDidMount() {
-    this.updatePage(this.props.location.pathname);
-  },
-  componentWillReceiveProps(nextProps) {
-    this.updatePage(nextProps.location.pathname);
-  },
-  updatePage(pathname) {
-    const pageNameObj = {
-      home: '一句詠む',
-      about: 'このサイトについて',
-      work: '川柳一覧',
-      noMatch: '四〇四'
-    };
-    let key;
-
-    if (/^\/work/.test(pathname)) {
-      key = 'work';
-    }
-    else if (/^\/about/.test(pathname)) {
-      key = 'about';
-    }
-    else if (/^\/$/.test(pathname)) {
-      key = 'home';
-    }
-    else {
-      key = 'noMatch';
-    }
-
-    this.setState({
-      page: pageNameObj[key]
-    });
+  isActiveNav(selected) {
+    return (this.state.selected === selected) ? style.navSelected : '';
   },
 
   render(){
@@ -88,22 +72,27 @@ export default React.createClass({
               <span>
                 <img src="/assets/i_share.svg" width="20" alt="共有する" />
               </span>
+
             </div>
           </div>
         </header>
         <nav className={style.nav}>
           <div className={style.navInner}>
             <ul>
-              <li><Link to="/">一句詠む</Link></li>
-              <li><Link to="/work/#">川柳一覧</Link></li>
-              <li><Link to="/about">このサイトについて</Link></li>
+              <li><Link to="/" className={this.isActiveNav('/')}>一句詠む</Link></li>
+              <li><Link to="/work/#" className={this.isActiveNav('/work')}>川柳一覧</Link></li>
+              <li><Link to="/about" className={this.isActiveNav('/about')}>このサイトについて</Link></li>
             </ul>
           </div>
         </nav>
         <div className={style.contents}>
           {React.cloneElement(
             this.props.children,
-            {onChange: this.onChangeType}
+            {
+              changeLayout: this.changeLayout,
+              changePageTitle: this.changePageTitle,
+              changeNavActive: this.changeNavActive
+            }
           )}
         </div>
       </div>

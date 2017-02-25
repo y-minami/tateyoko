@@ -1,7 +1,42 @@
 :local .wrap {
-  width: 100%;
-  height: 100%;
+  width: 575px;
+  height: 680px;
+  margin: 0 auto;
+  padding-top: 100px;
+  overflow: hidden;
+}
+:local .underline {
+  text-decoration: underline;
+}
+:local .headline {
+  float: right;
+  font-size: 2rem;
   writing-mode: vertical-rl;
-  padding: 5rem;
-  box-sizing: border-box;
+}
+:local .headline span {
+  display: inline-block;
+  height: 40px;
+}
+:local .content {
+  float: right;
+  padding: 40px 40px 0 0;
+  writing-mode: vertical-rl;
+  margin-left: 90px;
+  line-height: 1.8em;
+}
+:local .content:last-child {
+  margin-left: 0;
+}
+:local .creatorContent {
+  float: right;
+  padding: 40px 40px 0 0;
+  margin-left: 90px;
+  line-height: 1.8em;
+}
+:local .creator {
+  margin-top: 70px;
+  writing-mode: vertical-rl;
+}
+:local .creator:first-child {
+  margin-top: 0;
 }

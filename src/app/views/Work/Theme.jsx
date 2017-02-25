@@ -1,20 +1,19 @@
 import React from 'react';
 import Velocity from 'velocity-animate';
-import request from 'superagent';
-import find from 'lodash.find';
 
 import style from './Theme.css';
 
 
 export default React.createClass({
   propTypes: {
+    theme: React.PropTypes.array,
+    themeTitle: React.PropTypes.string,
     themeId: React.PropTypes.string
   },
 
   getInitialState() {
     return {
-      theme: [],
-      themeText: 'お題を選択してください',
+      themeTitle: 'お題を選択してください',
       selected: '',
       isOpenedModal: false
     };
@@ -22,39 +21,33 @@ export default React.createClass({
 
   componentDidMount(){
     this.setState({
-      themeId: this.props.themeId
+      selected: this.props.themeId,
+      themeTtile: this.props.themeTitle
     });
-
-    request
-      .get('/api/theme')
-      .end((err, res)=>{
-        if (err) {
-          return;
-        }
-
-        this.setState({
-          theme: res.body
-        });
-      });
   },
 
   componentWillReceiveProps(nextProps) {
-    let initTheme = find(this.state.theme, {_id: nextProps.themeId});
+    if (this.props.themeId !== nextProps.themeId) {
+      this.setState({
+        selected: nextProps.themeId
+      });
+    }
 
-    this.setState({
-      themeText: initTheme.title,
-      selected: initTheme._id
-    });
+    if (this.props.themeTitle !== nextProps.themeTitle) {
+      this.setState({
+        themeTitle: nextProps.themeTitle
+      });
+    }
   },
 
   onClickTheme(themeId, title) {
     this.setState({
-      themeText: title,
+      themeTitle: title,
       selected: themeId
     });
 
-    // Homeに伝達
-    this.props.onChange(themeId);
+    // parentに伝達
+    this.props.onChangeTheme(themeId, title);
   },
 
   isActive(value) {
@@ -62,6 +55,8 @@ export default React.createClass({
   },
 
   onClickButton(e) {
+    e.preventDefault();
+
     let modal = document.getElementById(style.modal);
 
     modal.style.display = 'block';
@@ -99,10 +94,10 @@ export default React.createClass({
   render() {
     return(
       <div className={style.wrap}>
-        <h3 className={style.headline}>お題<a className={style.button} href="#" onClick={this.onClickButton}>{this.state.themeText}</a>で詠まれた川柳</h3>
+        <h3 className={style.headline}>お題<a className={style.button} href="#" onClick={this.onClickButton}>{this.state.themeTitle}</a>で詠まれた川柳</h3>
         <div id={style.modal} className={style.modal} onClick={this.onClickOverlay}>
           <ol className={style.list}>
-            {this.state.theme.map((theme)=>{
+            {this.props.theme.map((theme)=>{
               return (
                 <li className={this.isActive(theme._id)} onClick={this.onClickTheme.bind(this, theme._id, theme.title)}>{theme.title}</li>
               )

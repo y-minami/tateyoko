@@ -1,11 +1,10 @@
 :local .wrap {
   width: 100%;
   height: 100%;
-  padding: 5rem;
-  box-sizing: border-box;
 }
 :local .author {
   float: right;
+  margin: 50px 50px 0 0;
   font-size: 24px;
   writing-mode: vertical-rl;
 }
@@ -13,13 +12,14 @@
   font-size: 16px;
 }
 :local .senriuWrap {
-  float: right;
-  margin-right: 30px;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  margin: -300px 220px 0 0;
 }
 :local .senriu {
-  position: relative;
   width: 295px;
-  margin: 0 auto;
+  height: 600px;
   padding: 50px 60px 100px;
   border: 8px solid #34495e;
   background-color: #fff;
@@ -48,10 +48,10 @@
   margin-right: 0;
 }
 :local .cols li:nth-child(2) {
-  margin-top: 40px;
+  text-align: center;
 }
 :local .cols li:nth-child(3) {
-  margin-top: 160px;
+  text-align: right;
 }
 :local .cols span {
   display: inline-block;
@@ -64,12 +64,23 @@
   vertical-align: top;
   font-size: 26px;
 }
+:local .facebook {
+  position: absolute;
+  left: -40px;
+  bottom: 35px;
+}
+:local .twitter {
+  position: absolute;
+  left: -40px;
+  bottom: 0;
+}
 :local .themeSenriuWrap {
-  position: fixed;
+  position: absolute;
   left: 0;
   top: 0;
   bottom: 0;
   z-index: 1;
+  min-height: 100%;
   padding: 40px 40px 0 100px;
   background: #34495e url(/assets/bg_asanoha.png);
   background-size: 61.75px 70px;

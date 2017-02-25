@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const basicAuth = require('basic-auth-connect');
 const methodOverride = require('method-override');
 const path = require('path');
+const request = require('superagent');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -58,25 +59,9 @@ apiRouter.route('/senriu')
 
 		Senriu
 			.find(query)
-			.sort('update')
+			.sort('-update')
 			.exec((err, senriu)=>{
-				Theme
-					.find()
-					.sort('-order')
-					.exec((err, themes)=>{
-						let themeIds = [];
-						themes.forEach((theme)=>{
-							themeIds.push(theme._id.toString());
-						});
-
-						let result = senriu.sort((a, b)=>{
-							if (themeIds.indexOf(a.themeId) < themeIds.indexOf(b.themeId)) return -1;
-							if (themeIds.indexOf(a.themeId) > themeIds.indexOf(b.themeId)) return 1;
-							return 0;
-						});
-
-						res.json(result);
-					});
+		    res.json(senriu);
 			});
 	})
 	.delete((req, res)=>{
@@ -193,6 +178,23 @@ app.use('/admin', (req, res)=>{
 });
 
 app.use('/', express.static('public'));
+
+app.get('/work/:urlId', function (req, res) {
+  request
+    .get(`http://localhost:3000/api/senriu/${req.params.urlId}`)
+    .end((err, response)=> {
+      if (err) {
+        console.log(err);
+        return;
+      }
+
+      res.render('work', {
+        url: `http://senriu.com/work/${req.params.urlId}`,
+        senriu: response.body
+      });
+    });
+});
+
 app.get('/*', (req, res)=>{
 	res.render('index');
 });

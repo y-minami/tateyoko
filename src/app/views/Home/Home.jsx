@@ -18,11 +18,15 @@ export default React.createClass({
       col1: '',
       col2: '',
       col3: '',
-      isSenriuActive: true
+      isBtnActive: false
     };
   },
 
   componentDidMount() {
+    this.props.changeNavActive('/');
+    this.props.changeLayout('default');
+    this.props.changePageTitle('一句詠む');
+
     request
       .get('/api/theme')
       .end((err, res)=>{
@@ -63,9 +67,13 @@ export default React.createClass({
     });
   },
 
-  onClickNextPhase2() {
+  onClickNextPhase2(e) {
+    e.preventDefault();
+
+    if (this.state.author === '' || this.state.themeId === '') return;
+
     // layoutのclass変更
-    this.props.onChange('fullscreen');
+    this.props.changeLayout('fullscreen');
 
     // 入力枠を初期化
     this.setState({
@@ -87,7 +95,7 @@ export default React.createClass({
 
   onClickBackPhase1() {
     // layoutのclass変更
-    this.props.onChange('default');
+    this.props.changeLayout('default');
 
     let phase1 = document.getElementById(style.phase1);
     let senriu = document.getElementById(style.senriu);
@@ -105,7 +113,7 @@ export default React.createClass({
 
   onClickNextView() {
     // layoutのclass変更
-    this.props.onChange('default');
+    this.props.changeLayout('default');
 
     // 川柳の枠を削除
     this.setState({
@@ -131,7 +139,7 @@ export default React.createClass({
 
   onClickBackPhase2() {
     // layoutのclass変更
-    this.props.onChange('fullscreen');
+    this.props.changeLayout('fullscreen');
 
     // 入力枠を初期化
     this.setState({
@@ -174,18 +182,19 @@ export default React.createClass({
       });
   },
 
-  changeStyleNav1() {
-    return style.nav1;
-  },
-
-  changeStyleNav2() {
-    return style.nav2;
-  },
-
   setValue(key, val) {
     this.setState({
       [key]: val
     });
+  },
+
+  changeClassRead() {
+    if (this.state.author !== '' && this.state.themeId !== '') {
+      return style.btnRead;
+    }
+    else {
+      return style.btnReadOff;
+    }
   },
 
   render() {
@@ -197,35 +206,35 @@ export default React.createClass({
             <p>まずはあなたの雅号（ニックネーム）を決めましょう。</p>
             <p>お題を選んで、心のままにあなたの川柳を詠んでみましょう。</p>
           </div>
-          <h2 className={style.stepHeadline}>
+          <h3 className={style.stepHeadline}>
             <span>一</span>雅号
-          </h2>
+          </h3>
           <div className={style.stepLine}>
             <Input id="author" number="10" onChange={this.setValue} active={true} />
           </div>
-          <h2 className={style.stepHeadline}>
+          <h3 className={style.stepHeadline}>
             <span>二</span>お題
-          </h2>
+          </h3>
           <div className={style.stepLine}>
             <Theme theme={this.state.theme} onChange={this.onChangeTheme} />
           </div>
-          <h2 className={style.stepHeadline}>
+          <h3 className={style.stepHeadline}>
             <span>三</span>詠む
-          </h2>
+          </h3>
           <div>
-            <a href="#" className={style.btnRead} onClick={this.onClickNextPhase2}>一句詠む</a>
+            <a href="#" className={this.changeClassRead()} onClick={this.onClickNextPhase2}>一句詠む</a>
           </div>
         </div>
         <div id={style.phase2} className={style.phase2}>
-          <h2 id={style.selectTheme} className={style.selectTheme}>
+          <h3 id={style.selectTheme} className={style.selectTheme}>
             <span>お題</span>「{this.state.themeTitle}」
-          </h2>
+          </h3>
           <div className={style.senriuWrap}>
             <div id={style.senriu} className={style.senriu}>
               <ol className={style.cols}>
-                <li><Input id="col1" number="5" onChange={this.setValue} active={this.state.isSenriuActive} /></li>
-                <li><Input id="col2" number="7" onChange={this.setValue} active={this.state.isSenriuActive} /></li>
-                <li><Input id="col3" number="5" onChange={this.setValue} active={this.state.isSenriuActive} /></li>
+                <li><Input id="col1" number="7" onChange={this.setValue} active={this.state.isSenriuActive} /></li>
+                <li><Input id="col2" number="9" onChange={this.setValue} active={this.state.isSenriuActive} /></li>
+                <li><Input id="col3" number="7" onChange={this.setValue} active={this.state.isSenriuActive} /></li>
               </ol>
               <p className={style.authorInitial}>{this.state.author.split('')[0]}</p>
             </div>

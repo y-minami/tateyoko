@@ -8,7 +8,7 @@
 }
 :local .col input {
   position: absolute;
-  left: 0;
+  left: 0px;
   top: -30px;
   opacity: 0;
 }

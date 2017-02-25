@@ -1,4 +1,6 @@
 :local .wrap {
+  height: 100%;
+  overflow: scroll;
   float: right;
   width: 400px;
   margin-top: -20px;
@@ -6,31 +8,36 @@
 }
 :local .senriu {
   float: right;
-  border: 4px solid #ccc;
-  width: 120px;
-  height: 240px;
   margin-top: 20px;
   margin-right: 20px;
-  padding: 22px;
   background-color: #fff;
 }
-:local .senriuActive {
-  border-color: #ffb307;
+:local .senriu a {
+  display: block;
 }
 :local .senriu:nth-child(3n+1) {
   margin-right: 0;
 }
 :local .cols {
-  margin: 0 auto;
+  width: 120px;
+  height: 240px;
+  padding: 25px;
+  border: 4px solid #ccc;
   font-size: 14px;
   writing-mode: vertical-rl;
 }
+:local .senriuActive .cols {
+  border-color: #ffb307;
+}
+:local .cols li {
+  margin-right: 10px;
+}
 :local .cols li:nth-child(1) {
-
+  margin-right: 0;
 }
 :local .cols li:nth-child(2) {
-  margin-top: 36px;
+  text-align: center;
 }
 :local .cols li:nth-child(3) {
-  margin-top: 100px;
+  text-align: right;
 }

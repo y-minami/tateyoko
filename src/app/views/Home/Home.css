@@ -35,7 +35,8 @@
   border-top: 1px solid #dbdad4;
   writing-mode: vertical-rl;
 }
-:local .btnRead {
+:local .btnRead,
+:local .btnReadOff {
   display: inline-block;
   width: 40px;
   margin-right: 25px;
@@ -44,6 +45,10 @@
   background-color: #fff;
   line-height: 40px;
   writing-mode: vertical-rl;
+}
+:local .btnReadOff {
+  color: #ccc;
+  background-color: #eee;
 }
 :local .selectTheme {
   display: none;
@@ -64,14 +69,15 @@
 
 :local .senriuWrap {
   position: fixed;
-  top: 40px;
+  top: 50%;
   left: 50%;
-  margin-left: -148px;
+  margin: -300px 0 0 -148px;
 }
 :local .senriu {
   display: none;
   position: relative;
   width: 295px;
+  height: 600px;
   margin: 0 auto;
   padding: 50px 60px 100px;
   border: 8px solid #34495e;
@@ -102,10 +108,10 @@
   margin-right: 0;
 }
 :local .cols li:nth-child(2) {
-  margin-top: 40px;
+  text-align: center;
 }
 :local .cols li:nth-child(3) {
-  margin-top: 160px;
+  text-align: right;
 }
 
 :local .nav1 .backPhase1 {
