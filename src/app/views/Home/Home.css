@@ -84,6 +84,7 @@
   background-color: #fff;
   background-image: url(/assets/bg_chidori.png);
   background-size: 200px;
+  box-shadow: 0 18px 20px -12px rgba(0,0,0,0.8);
   writing-mode: vertical-rl;
 }
 :local .authorInitial {

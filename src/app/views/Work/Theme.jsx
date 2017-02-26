@@ -14,8 +14,7 @@ export default React.createClass({
   getInitialState() {
     return {
       themeTitle: 'お題を選択してください',
-      selected: '',
-      isOpenedModal: false
+      selected: ''
     };
   },
 
@@ -48,6 +47,16 @@ export default React.createClass({
 
     // parentに伝達
     this.props.onChangeTheme(themeId, title);
+
+    let modal = document.getElementById(style.modal);
+
+    Velocity(modal, {
+      opacity: 0
+    },{
+      complete: ()=>{
+        modal.style.display = 'none';
+      }
+    });
   },
 
   isActive(value) {
@@ -64,12 +73,6 @@ export default React.createClass({
 
     Velocity(modal, {
       opacity: 1
-    },{
-      complete: ()=>{
-        this.setState({
-          isOpenedModal: (!this.state.isOpenedModal)
-        });
-      }
     });
   },
 
@@ -83,10 +86,6 @@ export default React.createClass({
     },{
       complete: ()=>{
         modal.style.display = 'none';
-
-        this.setState({
-          isOpenedModal: false
-        });
       }
     });
   },

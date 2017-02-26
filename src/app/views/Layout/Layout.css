@@ -6,6 +6,7 @@ html,body {
 
 html {
   font-size: 62.5%;
+  font-smoothing: antialiased;
 }
 body {
   font-family: "はんなり明朝", "hannari", "游明朝体", "Yu Mincho", "YuMincho", "Sawarabi Mincho", serif;
@@ -25,7 +26,7 @@ body:before {
   right: 0;
   bottom: 0;
   left: 0;
-  background-image: linear-gradient(#f3f2eb  50%, transparent 100%);
+  background-image: linear-gradient(#f3f2eb  50%, rgba(243, 242, 235, 0));
   opacity: 1;
   transition: opacity 0.5s cubic-bezier(.4, 0, .2, 1);
 }
