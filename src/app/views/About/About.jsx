@@ -20,7 +20,7 @@ export default React.createClass({
           <p>投稿された川柳の著作権は作者に帰属します。</p>
         </div>
         <h3 className={style.headline}>
-          <span>二</span>作者について
+          <span>二</span>制作者について
         </h3>
         <div className={style.creatorContent}>
           <div className={style.creator}>
