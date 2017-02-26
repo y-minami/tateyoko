@@ -74,12 +74,6 @@ export default React.createClass({
           <div className={style.headerInner}>
             <h1>せんりう</h1>
             <h2 className={style.pageTitle}>{this.state.page}</h2>
-            <div className={style.headerShare}>
-              <span>
-                <img src="/assets/i_share.svg" width="20" alt="共有する" />
-              </span>
-
-            </div>
           </div>
         </header>
         <nav id={style.nav} className={style.nav}>
