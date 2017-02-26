@@ -6,7 +6,7 @@ html,body {
 
 html {
   font-size: 62.5%;
-  font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
 }
 body {
   font-family: "はんなり明朝", "hannari", "游明朝体", "Yu Mincho", "YuMincho", "Sawarabi Mincho", serif;
