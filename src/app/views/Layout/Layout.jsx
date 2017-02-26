@@ -29,28 +29,34 @@ export default React.createClass({
     };
   },
 
+  componentDidUpdate(){
+    document.getElementById(style.header).style.height = '99.99%';
+    document.getElementById(style.nav).style.height = '99.99%';
+    setTimeout(()=>{
+      document.getElementById(style.header).style.height = '100%';
+      document.getElementById(style.nav).style.height = '100%';
+    }, 50);
+  },
+
   changeLayout(type){
     this.setState({
       screenType: type
     }, ()=>{
-
     });
-
-    window.scrollTo(0, 1);
   },
 
   changePageTitle(title) {
     this.setState({
       page: title
+    }, ()=>{
     });
   },
 
   changeNavActive(selected) {
     this.setState({
       selected: selected
+    }, ()=>{
     });
-
-    window.scrollTo(0, 1);
   },
 
   getScreenType() {
@@ -64,7 +70,7 @@ export default React.createClass({
   render(){
     return(
       <div className={this.getScreenType()}>
-        <header className={style.header}>
+        <header id={style.header} className={style.header}>
           <div className={style.headerInner}>
             <h1>せんりう</h1>
             <h2 className={style.pageTitle}>{this.state.page}</h2>
@@ -76,7 +82,7 @@ export default React.createClass({
             </div>
           </div>
         </header>
-        <nav className={style.nav}>
+        <nav id={style.nav} className={style.nav}>
           <div className={style.navInner}>
             <ul>
               <li><Link to="/" className={this.isActiveNav('/')}>一句詠む</Link></li>

@@ -1,5 +1,6 @@
 :local .wrap {
   float: right;
+  width: 40px;
 }
 :local .headline {
   color: #fff;

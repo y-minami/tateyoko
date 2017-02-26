@@ -32,6 +32,7 @@
   padding: 40px 40px 0 0;
   margin-left: 90px;
   line-height: 1.8em;
+  min-width: 127px;
 }
 :local .creator {
   margin-top: 70px;

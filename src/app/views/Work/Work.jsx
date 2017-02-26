@@ -51,6 +51,9 @@ export default React.createClass({
         author: res.body.author,
         themeId: res.body.themeId,
         urlId: res.body.urlId
+      },()=>{
+        document.body.style.opacity = 0.99;
+        document.body.style.opacity = 1;
       });
 
       request
